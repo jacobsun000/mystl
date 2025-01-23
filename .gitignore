@@ -1,0 +1,61 @@
+# Xmake build artifacts
+.xmake
+build/
+dist/
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.pch
+*.pdb
+*.ilk
+*.d
+compile_commands.json
+
+# Ninja build files
+*.ninja
+.ninja_log
+.ninja_deps
+
+# Clang specific files
+*.dSYM/
+*.clangd/
+*.ast
+*.ccls-cache/
+*.cache/
+*.clang-format
+*.clang-tidy
+
+# Editor and IDE files
+.idea/
+.vscode/
+*.code-workspace
+*.suo
+*.user
+*.userosscache
+*.sln
+*.sw?
+*~
+
+# System-specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Tests output (optional, if tests generate files)
+tests/output/
+
+# Generated files (optional)
+modules/*.gch
+modules/*.pcm
