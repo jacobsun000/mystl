@@ -1,4 +1,4 @@
-import types;
+import type;
 using namespace mystl;
 
-int main() { return 0; }
+i32 main() { return 0; }
