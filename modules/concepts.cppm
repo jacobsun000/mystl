@@ -35,12 +35,12 @@ concept signed_type = requires {
 template <typename T>
 concept unsigned_type = requires {
   requires integral<T>;
-  requires T(0) <= T(-1); // Non-negative test
+  requires T(0) <= T(-1);
 };
 
 // Concept for default-constructible types
 template <typename T>
-concept default_constructible = requires { T{}; };
+concept default_constructible = requires { T(); };
 
 // Concept for copy-constructible types
 template <typename T>
@@ -63,39 +63,30 @@ concept move_constructible = requires(T a) {
 // Concept for containers
 template <typename T>
 concept container = requires(T a) {
-  typename T::value_type;     // Must have a value_type
-  typename T::size_type;      // Must have a size_type
-  typename T::iterator;       // Must have an iterator type
-  typename T::const_iterator; // Must have a const_iterator type
+  typename T::ValueType;
+  typename T::SizeType;
+  typename T::Iterator;
 
-  { a.begin() } -> std::input_or_output_iterator;      // Must have begin()
-  { a.end() } -> std::input_or_output_iterator;        // Must have end()
-  { a.size() } -> std::same_as<typename T::size_type>; // Must have size()
+  { a.begin() } -> std::input_or_output_iterator;
+  { a.end() } -> std::input_or_output_iterator;
+  { a.size() } -> std::same_as<typename T::SizeType>;
 };
 
 // Concept for resizable containers (e.g., vector, deque)
 template <typename T>
 concept resizable_container =
-    container<T> && requires(T a, typename T::size_type n) {
-      a.resize(n); // Must support resize()
-    };
+    container<T> && requires(T a, typename T::SizeType n) { a.resize(n); };
 
 ////////////////////////////////
 // Iterator Concepts
 ////////////////////////////////
-
-// Concept for input iterators
-template <typename T>
-concept input_iterator = requires(T i) {
-  { ++i };
-};
 
 // Concept for Iterable
 template <typename T>
 concept iterable = requires(T t) {
   { t.begin() };
   { t.end() };
-  requires input_iterator<decltype(t.begin())>;
+  { t.size() };
 };
 
 ////////////////////////////////
